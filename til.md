@@ -96,3 +96,20 @@ interface PaginatedResponse<T> {
 let myHistory: PaginatedResponse<Workout>;
 ```
 
+# Day 5 - Interfaces vs types
+
+**concept** - Both define data shapes, but an `interface` is restricted to objects and is "open" (supports declaration merging). A `type` alias can represent any data structure (including Unions like `"success" | "error"`) and is "closed" (throws an error on duplicates).
+
+**code** - 
+
+```typescript
+// 1. Interfaces are best for Object Contracts (and can merge)
+interface UserProfile {
+    id: number;
+    username: string;
+}
+
+// 2. Types are required for Unions and complex logic
+type FetchState = "loading" | "success" | "failed";
+```
+
