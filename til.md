@@ -45,3 +45,8 @@ let chestDay = createWorkoutTracker();
 chestDay.addSet(40, 2);
 
 console.log(chestDay.getTotalVolume());
+```
+
+# Day 2 - Event Loop    
+
+**concept** - Synchronous code $\rightarrow$ All Microtasks (Promises) $\rightarrow$ Render $\rightarrow$ ONE Macrotask (setTimeout) $\rightarrow$ Repeat 
