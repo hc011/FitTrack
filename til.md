@@ -50,3 +50,26 @@ console.log(chestDay.getTotalVolume());
 # Day 2 - Event Loop    
 
 **concept** - Synchronous code $\rightarrow$ All Microtasks (Promises) $\rightarrow$ Render $\rightarrow$ ONE Macrotask (setTimeout) $\rightarrow$ Repeat 
+
+# Day 3 - Promises and async/await 
+
+**concept** - To use `await` with a callback-based API like `setTimeout`, you must wrap it in a `new Promise` constructor. The `await` keyword pauses the execution of that specific function until `resolve()` is called, yielding the thread back to the Event Loop.
+
+**code** - 
+
+```typescript
+function sleep(ms: number) {
+    return new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), ms);
+    });
+}
+
+async function fetchWorkoutHistory(userId: number) {
+    await sleep(2000);
+    return `history array for user ${userId}`;
+}
+
+fetchWorkoutHistory(2).then(data => console.log(data));
+```
+
+
