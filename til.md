@@ -73,3 +73,26 @@ fetchWorkoutHistory(2).then(data => console.log(data));
 ```
 
 
+
+
+# Day 4 - Typescript Generics
+
+**concept** - Generics act as variables for types, allowing us to pass a specific type (like `<T>`) into an interface or function to make it highly reusable without losing strict type safety.
+
+**code** - 
+
+```typescript
+interface Workout {
+    id: number;
+    exercise: string;
+}
+
+interface PaginatedResponse<T> {
+    totalItems: number;
+    currentPage: number;
+    data: T[];
+}
+
+let myHistory: PaginatedResponse<Workout>;
+```
+
