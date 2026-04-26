@@ -221,3 +221,25 @@ let bfunc = premiumUser.calculateCheck.bind(standardUser);
 // Borrowing with apply (Array)
 premiumUser.calculateCheckout.apply(standardUser, ["Guitar", 20, 5]);
 ```
+
+# Day 10 - prototypal inheritence
+
+**concept** - JavaScript does not have traditional classes. Instead, objects inherit directly from other objects via a hidden `[[Prototype]]` chain. When a property or method is not found on an object, the engine delegates the lookup up the chain. Using `Object.create(parentObject)` is the native way to build this link.
+
+**code** - 
+
+```javascript
+const baseUser = {
+        isLoggedIn: false,
+        login: function () {
+            this.isLoggedIn = true;
+            console.log("User successfully logged in.");
+        }
+    };
+
+    const premiumUser = Object.create(baseUser);
+
+    premiumUser.discountRate = 0.15;
+
+    premiumUser.login();
+```
