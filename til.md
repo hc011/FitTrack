@@ -243,3 +243,24 @@ const baseUser = {
 
     premiumUser.login();
 ```
+
+# Day 11 - `Promise.all` and Concurrent Execution
+
+**concept** - When making multiple asynchronous calls that do not depend on each other, awaiting them sequentially creates a massive performance bottleneck. `Promise.all` takes an array of pending Promises and delegates them concurrently to the Web API/environment. It resolves only when every single Promise has finished, returning an array of results in the exact order they were requested.
+
+**Warning:** `Promise.all` is "fail-fast." If even one promise rejects, the entire array rejects immediately.   
+
+**code** - 
+
+```javascript
+const fetchUserProfile = () => new Promise(resolve => setTimeout(() => resolve({ id: 1, name: "power_renter" }), 1000));
+const fetchActiveRentals = () => new Promise(resolve => setTimeout(() => resolve(["Camera", "Guitar"]), 1500));
+
+async function loadDashboard() {
+    // Both requests are handed to the Web API simultaneously. Total wait time: 1.5s
+    let [userProfiles, activeRentals] = await Promise.all([fetchUserProfile(), fetchActiveRentals()]);
+    console.log({ userProfiles, activeRentals });
+}
+
+loadDashboard();
+```
