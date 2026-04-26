@@ -294,3 +294,31 @@ async function loadResilientDashboard() {
 
 loadResilientDashboard();
 ```
+
+# Day 13 - Currying, partial application
+
+**concept** - Currying is the architectural pattern of converting a function that takes multiple arguments into a sequence of nested functions that each take a single argument: `f(a, b, c)` becomes `f(a)(b)(c)`. 
+
+The primary benefit is **Partial Application**. Because of closures, we can supply the first argument, lock it into memory, and save the returned function to a variable. This allows us to generate highly reusable, customized utility functions without duplicating logic. 
+
+**code** - 
+
+```typescript
+
+const calculatePrice = (discountRate: number, basePrice: number, days: number) => {
+        const total = basePrice * days;
+        return total - (total * discountRate);
+};
+
+const curriedCalculatePrice = (discountRate: number) => (basePrice: number) => (days: number) => {
+    const total = basePrice * days;
+    return total - (total * discountRate);
+}
+
+// Partially applying the 15% discount. It returns a function expecting basePrice.
+const applyPremiumDiscount = curriedCalculatePrice(0.15);
+
+// Reusing our custom utility
+console.log(applyPremiumDiscount(50)(3)); // Calculates 50 * 3 with 15% off
+console.log(applyPremiumDiscount(20)(5)); // Calculates 20 * 5 with 15% off
+```
