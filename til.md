@@ -163,3 +163,33 @@ function throttle(func: (...args: any[]) => void, delay: number) {
         }
     }
 ```
+
+# Day 8 - The 'this' keyword and context 
+
+**concept** -  In standard functions, `this` is dynamic and depends on *how* the function is called. Passing a method as a callback (like to `setTimeout`) strips its context, making `this` undefined. We fix this by explicitly locking the context with `.bind()`, or by using an ES6 Arrow Function, which natively inherits `this` from its surrounding lexical scope.
+
+**code** - 
+
+```javascript
+const waitingRoom = {
+    clinicName: "City Health Clinic",
+    
+    // Fix 1: Using .bind()
+    announcePatient: function() {
+        console.log(`Welcome to ${this.clinicName}`);
+    },
+
+    // Fix 2: Using an Arrow Function to inherit lexical scope
+    triggerDelayedAnnouncement: function() {
+        setTimeout(() => {
+            console.log(`Welcome to ${this.clinicName}`);
+        }, 2000);
+    }
+};
+
+// Execution
+const boundFunc = waitingRoom.announcePatient.bind(waitingRoom);
+setTimeout(boundFunc, 2000);
+
+waitingRoom.triggerDelayedAnnouncement();
+```
