@@ -113,3 +113,53 @@ interface UserProfile {
 type FetchState = "loading" | "success" | "failed";
 ```
 
+
+# Day 6 - Debouncing
+
+**concept** - debounce is used to delay a function call and just execute the operation after a specific delay
+
+**code** - 
+
+```typescript
+function debounce(func: (...args:any[]) => void, delay: number) {
+        let timerId: ReturnType<typeof setTimeout>
+
+        return function (...args:any[]) {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => func(...args), delay);
+        }
+
+    }
+
+    const searchExercise = () => console.log("Fetching: Bench Press");
+    const debouncedSearch = debounce(searchExercise, 500);
+
+    // Simulating a user typing fast:
+    debouncedSearch(); // Timer starts
+    debouncedSearch(); // Timer resets
+    debouncedSearch();
+```
+
+
+# Day 7 - Throttling 
+
+**concept** - Throttling is a performance optimization technique that forces a strict speed limit on a function. Unlike debouncing (which waits for a pause), throttling ensures a function executes at a steady, consistent rhythm (e.g., exactly once every 500ms) by using a boolean lock trapped inside a Closure.
+
+**code** - 
+
+```typescript
+function throttle(func: (...args: any[]) => void, delay: number) {
+        let isWaiting = false;
+
+        return function (...args: any[]) {
+            if (isWaiting) return;
+
+            func(...args);
+            isWaiting = true;
+
+            setTimeout(() => {
+                isWaiting = false;
+            }, delay);
+        }
+    }
+```
