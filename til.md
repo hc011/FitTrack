@@ -264,3 +264,33 @@ async function loadDashboard() {
 
 loadDashboard();
 ```
+
+
+
+# Day 12 - `Promise.allSettled` and Resilient UI
+
+**concept** - When building user interfaces, you rarely want an entire dashboard to crash because one minor endpoint failed. Promise.allSettled waits for all promises in the array to finish executing, regardless of whether they succeed or fail. Instead of throwing a fatal error, it returns an array of objects describing the exact outcome ("fulfilled" or "rejected") of each promise, allowing the UI to gracefully handle partial failures.
+
+**code** - 
+
+```javascript
+// Simulating a failed endpoint
+const fetchRecommendations = () => Promise.reject("Server 500 Error");
+
+async function loadResilientDashboard() {
+    const results = await Promise.allSettled([
+        fetchUserProfile(),
+        fetchRecommendations()
+    ]);
+
+    console.log(results);
+    /* Output:
+    [
+      { status: "fulfilled", value: { id: 1, name: "power_renter" } },
+      { status: "rejected", reason: "Server 500 Error" }
+    ]
+    */
+}
+
+loadResilientDashboard();
+```
