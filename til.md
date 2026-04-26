@@ -193,3 +193,31 @@ setTimeout(boundFunc, 2000);
 
 waitingRoom.triggerDelayedAnnouncement();
 ```
+
+# Day 9 - Explicit binding 'call' and 'apply'
+
+**concept** - Method borrowing allows one object to use another object's method without duplicating code. We use `.call()` and `.apply()` to execute a function immediately while forcing its `this` context to a specific object.
+* `.call()` passes arguments separated by **C**ommas.
+* `.apply()` passes arguments inside an **A**rray.
+
+**code** - 
+
+```javascript
+const premiumUser = {
+    username: "power_renter",
+    discountRate: 0.10,
+    calculateCheckout: function(itemName, basePrice, days) {
+        // ... calculation logic ...
+    }
+};
+
+const standardUser = { username: "guest_user", discountRate: 0.00 };
+
+// Borrowing with call (Comma separated)
+premiumUser.calculateCheckout.call(standardUser, "Camera", 50, 3);
+
+let bfunc = premiumUser.calculateCheck.bind(standardUser);
+
+// Borrowing with apply (Array)
+premiumUser.calculateCheckout.apply(standardUser, ["Guitar", 20, 5]);
+```
