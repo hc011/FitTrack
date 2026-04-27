@@ -456,3 +456,11 @@ const onClick = (event) => {
 // The browser will automatically pass the 'event' argument to onClick.
 list?.addEventListener('click', onClick);
 ```
+
+# Day 15 - Websocket and persistent connection  
+
+**concept** - Standard HTTP requests are one-way and temporary (Client asks -> Server answers -> Connection closes). If a client needs real-time updates, repeatedly polling the server wastes massive resources. WebSockets provide a persistent, two-way, open connection. The server can push data to the client instantly without the client ever requesting it.
+
+**code** - 
+
+```typescript
