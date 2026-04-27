@@ -463,4 +463,17 @@ list?.addEventListener('click', onClick);
 
 **code** - 
 
-```typescript
+```javascript
+const socket = new WebSocket('wss://[api.yourclinic.com/live-queue](https://api.yourclinic.com/live-queue)');
+
+// Listen for the server pushing data
+socket.addEventListener('message', (event) => {
+    const data = JSON.parse(event.data);
+    
+    // React to specific server events
+    if (data.type === "CALL_PATIENT") {
+        console.log(`Patient ${data.patientId}, please proceed to Room ${data.roomNumber}`);
+    }
+});
+```
+
